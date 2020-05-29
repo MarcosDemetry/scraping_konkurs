@@ -1,3 +1,7 @@
+####################
+### Parsing Data ###
+####################
+
 from pathlib import Path
 import os,  requests, time, re 
 from random import randint
