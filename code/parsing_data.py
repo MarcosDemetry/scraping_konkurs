@@ -33,7 +33,7 @@ employees = []
 
 failed = []
 
-months = ['januari', 'februari', 'mars', 'april', 'maj']
+months = ['januari', 'februari', 'mars', 'april', 'maj', 'juni', 'juli']
 year = '2020'
 
 for month in months:

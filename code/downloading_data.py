@@ -18,12 +18,13 @@ outputdir = str(Path(root)) + str('/output')
 print("Root: " + str(root))
 
 ## https://kreditrapporten.se/konkurser-april-2020
+## Read Robots.txt: https://kreditrapporten.se/robots.txt
 
 ### For scraping
 HEADERS = {'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1.1 Safari/605.1.15'}
 
 # Lists to loop over
-months = ['januari', 'februari', 'mars', 'april', 'maj']
+months = ['januari', 'februari', 'mars', 'april', 'maj', 'juni', 'juli']
 years = ['2020']
 
 
@@ -42,7 +43,7 @@ for year in years:
             res = requests.get(url, timeout = 5, headers = HEADERS)
             print(res)
 
-            time.sleep(randint(10,20))
+            time.sleep(randint(10,30))
 
             nr_requests += 1
             elapsed_time = time.time() - start_time
