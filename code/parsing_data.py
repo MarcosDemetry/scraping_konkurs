@@ -94,4 +94,4 @@ df['employees'] = df['info2'].str.extract(r'((\d{1,3})? (\d{1,3})) anställda')[
 
 #df.drop(['info1', 'info2'])
 outfile = str(datadir) + "/clean_konkurs_data.csv"
-df.to_csv(outfile)
+df.to_csv(outfile, index=False)
