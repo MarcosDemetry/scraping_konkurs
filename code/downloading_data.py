@@ -24,7 +24,7 @@ print("Root: " + str(root))
 HEADERS = {'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1.1 Safari/605.1.15'}
 
 # Lists to loop over
-months = ['januari', 'februari', 'mars', 'april', 'maj', 'juni', 'juli']
+months = ['januari', 'februari', 'mars', 'april', 'maj', 'juni', 'juli', 'augusti', 'september', 'oktober', 'november', 'december']
 years = ['2020']
 
 

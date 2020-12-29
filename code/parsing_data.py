@@ -28,12 +28,14 @@ dates = []
 orts = []
 
 infos2 = []
+
+infos3 = []
 revenues =[]
 employees = []
 
 failed = []
 
-months = ['januari', 'februari', 'mars', 'april', 'maj', 'juni', 'juli']
+months = ['januari', 'februari', 'mars', 'april', 'maj', 'juni', 'juli','augusti', 'september', 'oktober', 'november']
 year = '2020'
 
 for month in months:
@@ -60,6 +62,7 @@ for month in months:
 
             info1 = row.find_all('div')[0]
             info2 = row.find_all('div')[1]
+            info3 = row.find_all('div')[2]
 
             # Filling in lists
             names.append(name.get_text())
@@ -67,6 +70,7 @@ for month in months:
             orgnrs.append(orgnr)
             infos1.append(info1)
             infos2.append(info2)
+            infos3.append(info3)
 
         except:
             print("Couldn't parse firm {}.".format(orgnr))
@@ -77,7 +81,8 @@ df = pd.DataFrame({'name'       :   names,
                    'link'       :   links,
                    'orgnr'      :   orgnrs,
                    'info1'      :   infos1,
-                   'info2'      :   infos2})
+                   'info2'      :   infos2,
+                   'info3'      :   infos3})
 
 outfile = str(datadir) + "/raw_konkurs_data.csv"
 df.to_csv(outfile)
@@ -87,11 +92,14 @@ file = str(datadir) + "/raw_konkurs_data.csv"
 df = pd.read_csv(file, index_col=0)
 
 df['date'] = df['info1'].str.extract(r'(\d{4}-\d{2}-\d{2})')
-df['ort'] = df['info1'].str.extract(r'\d{4}-\d{2}-\d{2} - (.+)<')
+df['ort'] = df['info1'].str.extract(r'\d{4}-\d{2}-\d{2} - .+>(.+)</span>')
 
-df['revenue'] = df['info2'].str.extract(r'Omsättning.+ ((\d{1,3})? (\d{1,3}) (t?kr))')[0]
-df['employees'] = df['info2'].str.extract(r'((\d{1,3})? (\d{1,3})) anställda')[0]
+df['municipality'] = df['info2'].str.extract(r'säte i .+>(.+)</span>')
 
-#df.drop(['info1', 'info2'])
+df['revenue'] = df['info3'].str.extract(r'Omsättning.+ ((\d{1,3})? (\d{1,3}) (t?kr))')[0]
+df['employees'] = df['info3'].str.extract(r'((\d{1,3})? (\d{1,3})) anställda')[0]
+
+df.drop(['info1', 'info2', 'info3'], axis=1, inplace=True)
+
 outfile = str(datadir) + "/clean_konkurs_data.csv"
 df.to_csv(outfile, index=False)
